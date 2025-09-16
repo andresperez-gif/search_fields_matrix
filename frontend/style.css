@@ -1,0 +1,646 @@
+/* 
+ * Airtable Interface Extensions Stylesheet with Tailwind CSS
+ * ============================================================
+ * This file provides Tailwind CSS with design tokens mapped from Airtable's design system. 
+ *
+ * How it works:
+ * -------------
+ * - Tailwind CSS v3 is imported via @tailwind directives below
+ * - Custom design tokens are configured in `tailwind.config.js`
+ * - You can use Tailwind utility classes that automatically match Airtable's design system
+ * - Example: `color
+ *
+ * **This Stylesheet is optional!**
+ * --------------------------------
+ * You are *not* required to use Tailwind. To opt-out:
+ * 1. Remove the `import './style.css';` line from `index.tsx`.
+ * 2. Remove the bundler configuration from `block.json`.
+ * 3. (Optional) Delete the `style.css`, `bundler.js`, and `tailwind.config.js` files.
+ *
+ * Using Tailwind classes:
+ * ----------------------
+ * You can use Tailwind classes that are mapped to Airtable's design tokens:
+ * - Colors: `text-gray-gray900` (uses Airtable's gray900), `bg-blue-blue` (uses Airtable's blue)
+ * - Spacing: `p-4` (16px), `m-2` (8px) 
+ * - Typography: `text-base` (13px, Airtable's body-default), `font-display` (Inter Display)
+ * - Shadows: `shadow-sm` (uses Airtable's elevation-low)
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Red Bull Brand Font (import if available) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght=700&display=swap');
+
+/* Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #002654;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #002654;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 20px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.rb-legend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff;
+  border: 1px solid #e7e7e7;
+  box-shadow: 0 2px 8px 0 rgba(20, 20, 20, 0.06);
+  border-radius: 8px;
+  padding: 0 14px;
+  min-height: 32px;
+  font-family: 'Futura Condensed', 'Arial Narrow', Arial, sans-serif !important;
+  font-size: 0.97rem;
+  margin-bottom: 0;
+}
+.rb-legend-title {
+  font-weight: 600;
+  color: #313131;
+  font-size: 0.92rem;
+  margin-right: 4px;
+}
+.rb-legend-field {
+  font-weight: 500;
+  color: #313131;
+  margin-right: 6px;
+} 
+.rb-legend-choice {
+  display: flex;
+  align-items: center;
+  margin-right: 4px;
+}
+.rb-legend-swatch {
+  width: 18px;
+  height: 18px;
+  border: 1px solid #e7e7e7;
+  margin-right: 4px;
+  box-shadow: 0 1.5px 4px 0 rgba(20,20,20,0.05);
+}
+.rb-legend-label {
+  font-size: 0.98rem;
+  color: #444;
+  font-weight: 400;
+}
+
+:root {
+  --rb-red: #e10600;
+  --rb-blue: #002654;
+  --rb-yellow: #ffd700;
+  --rb-gray: #f5f5f5;
+  --rb-dark: #181818;
+}
+
+.rb-matrix-root {
+  padding: 32px 8px;
+  min-height: 100vh;
+  background: var(--rb-gray);
+  font-family: 'Futura Condensed', 'Arial Narrow', Arial, sans-serif !important;
+}
+.rb-header-bar {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+.rb-logo {
+  height: 44px;
+  width: auto;
+  display: block;
+}
+.rb-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--rb-red);
+  text-align: left;
+  margin: 0;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  flex: 1;
+}
+.rb-matrix-table {
+  overflow-x: auto;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  padding: 16px;
+}
+.rb-matrix-header {
+  font-size: 1rem;
+  background: #fafbfc;
+  border-bottom: 1px solid #e3e5e8;
+  min-height: 36px;
+  padding-top: 8px; /* Added top padding */
+  letter-spacing: 0;
+  font-family: 'Futura Condensed', 'Arial Narrow', Arial, sans-serif !important;
+  box-shadow: none;
+
+  display: flex;
+  align-items: stretch;
+  font-weight: 700;
+}
+.rb-matrix-corner {
+  width: 140px;
+}
+.rb-matrix-column {
+  flex: 1 1 160px;
+  min-width: 120px;
+  padding: 12px 8px;
+  background: var(--rb-blue);
+  color: white;
+  text-align: center;
+  border-right: 2px solid #e7e7e7;
+  border-radius: 8px 8px 0 0;
+  font-size: 2rem !important;
+  font-family: 'Futura Condensed', 'Arial Narrow', Arial, sans-serif !important;
+}
+.rb-matrix-column *, .rb-matrix-column span, .rb-matrix-column div {
+  font-size: 2rem !important;
+}
+
+.rb-matrix-column-header {
+  font-family: 'Futura Condensed', 'Arial Narrow', Arial, sans-serif !important;
+  position: sticky;
+  top: 0;
+  background: #fafbfc;
+  z-index: 10;
+}
+
+.rb-matrix-row-label {
+  font-family: 'Futura Condensed', 'Arial Narrow', Arial, sans-serif !important;
+  position: sticky;
+  left: 0;
+  background: #fafbfc;
+  z-index: 9;
+  font-size: 2rem !important;
+}
+.rb-matrix-row-label *, .rb-matrix-row-label span, .rb-matrix-row-label div {
+  font-size: 2rem !important;
+}
+
+.rb-matrix-column:last-child {
+  border-right: none;
+}
+.rb-matrix-body {
+}
+.rb-matrix-row {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid #e3e5e8;
+  min-height: 36px;
+  font-size: 1.7rem;
+  font-family: 'Futura Condensed', 'Arial Narrow', Arial, sans-serif !important;
+  background: white;
+  transition: background 0.12s;
+}
+
+
+.rb-matrix-row-selected {
+  background: #e6f0ff !important;
+  border-left: 3px solid #0074d9;
+  box-shadow: 0 2px 8px rgba(0,60,255,0.04);
+}
+
+.rb-matrix-row[tabindex]:focus {
+  outline: 2px solid #0074d9;
+  outline-offset: -2px;
+}
+
+
+.rb-matrix-cell {
+  flex: 1 1 160px;
+  min-width: 120px;
+  padding: 4px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #e3e5e8;
+  font-size: 0.97rem;
+  font-family: 'Futura Condensed', 'Arial Narrow', Arial, sans-serif !important;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  transition: background 0.12s;
+}
+.rb-matrix-cell:last-child {
+  border-right: none;
+}
+
+.rb-matrix-row {
+  width: 140px;
+  min-width: 120px;
+  background: #e8eef7;
+  color: var(--rb-blue);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-weight: 400;
+  font-size: 1.5rem;
+  border-radius: 0;
+  border-left: 3px solid #002654;
+  padding: 8px 8px;
+  text-align: left;
+} /* updated for Airtable style */
+/*
+.old-rbm-row {
+  width: 140px;
+  min-width: 120px;
+  background: var(--rb-blue);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  border-radius: 0 0 0 8px;
+  padding: 12px 8px;
+  text-align: center;
+}
+*/
+.rb-matrix-cell {
+  flex: 1 1 160px;
+  min-width: 120px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 2px solid #e7e7e7;
+}
+.rb-matrix-cell:last-child {
+  border-right: none;
+}
+.rb-cell-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 6px;
+  width: 100%;
+  min-height: 108px;
+}
+.rb-cell-record {
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: box-shadow 0.15s;
+  padding: 6px 2px 2px 2px;
+  min-height: 62px;
+  height: 70px;
+  min-width: 0;
+}
+.rb-cell-record:hover {
+  box-shadow: 0 4px 16px rgba(120,120,120,0.13);
+}
+.rb-cell-title {
+  font-family: 'Futura Medium', 'Futura', Arial, sans-serif !important;
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: #222;
+  text-align: left;
+  margin-top: 2px;
+  line-height: 1.18;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  max-width: 120px;
+  min-height: 2.3em;
+  height: 2.5em;
+  letter-spacing: normal;
+  text-transform: none;
+  background: none;
+  border: none;
+  box-shadow: none;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  white-space: normal;
+  line-clamp: 2;
+  /* allow wrapping, clamp to 2 lines */
+}
+
+/* Force row and column group label font size */
+.rb-matrix-row, .rb-matrix-row *, .rb-matrix-column, .rb-matrix-column * {
+  font-size: 2rem !important;
+  line-height: 1.1 !important;
+}
+
+.rb-cell-plus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  min-height: 48px;
+  background: #fff7b2;
+  color: var(--rb-blue);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+  border: 2px solid #ffe066;
+  transition: background 0.15s;
+}
+.rb-cell-plus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  transition: box-shadow 0.14s, background 0.13s, color 0.13s;
+  box-shadow: none;
+}
+.rb-cell-plus:hover {
+  box-shadow: 0 4px 16px rgba(120,120,120,0.13);
+  background: #f6f7f9;
+}
+.rb-cell-plus-number {
+  color: #888;
+  font-size: 1rem;
+  font-weight: 400;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2px 0 0 0;
+  line-height: 1.1;
+}
+.rb-cell-plus:hover {
+  box-shadow: 0 4px 16px rgba(20,23,26,0.13);
+  background: #f6f7f9;
+  color: #246bfd;
+}
+.rb-cell-plus:hover {
+  background: #e5e7eb;
+  color: #246bfd;
+  border-color: #b8c2cc;
+}
+.rb-thumb {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: #eee;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.rb-thumb-placeholder {
+  background: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.rb-thumb-small {
+  width: 28px;
+  height: 28px;
+  border-radius: 5px;
+  object-fit: cover;
+  background: #eee;
+  margin-right: 10px;
+}
+/* Modal Styles */
+.rb-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.25);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.rb-modal-box {
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 1.5px 8px rgba(20,23,26,0.08);
+  min-width: 320px;
+  max-width: 98vw;
+  max-height: 80vh;
+  overflow: auto;
+  padding: 0 0 20px 0;
+}
+.rb-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px 10px 18px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  background: #f8f9fa;
+  color: #222;
+  border-radius: 6px 6px 0 0;
+  border-bottom: 1px solid #e3e5e8;
+  font-family: 'Futura Condensed', 'Arial Narrow', Arial, sans-serif !important;
+}
+.rb-modal-close {
+  background: transparent;
+  border: none;
+  color: #888;
+  font-size: 1.7rem;
+  cursor: pointer;
+  margin-left: 16px;
+  font-weight: 400;
+  line-height: 1;
+  transition: color 0.13s;
+}
+.rb-modal-close:hover {
+  color: #222;
+}
+.rb-modal-list {
+  padding: 12px 16px 0 16px;
+  max-height: 62vh;
+  overflow-y: auto;
+}
+.rb-modal-record {
+  display: flex;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background 0.13s;
+}
+.rb-modal-record:hover {
+  background: #f6f6f6;
+}
+.rb-modal-title {
+  font-size: 1rem;
+  color: #2B2D31; /* Airtable's dark gray for text */
+  font-weight: 500; /* Slightly lighter weight to match Airtable */
+  margin-left: 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; /* Airtable's font stack */
+}
+/* Config UI */
+.rb-config {
+  margin: 80px auto;
+  max-width: 360px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 18px rgba(0,0,0,0.11);
+  padding: 32px 18px;
+  text-align: center;
+  font-family: 'Futura Condensed', 'Arial Narrow', Arial, sans-serif !important;
+}
+.rb-config h2 {
+  color: var(--rb-red);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.rb-config p {
+  color: #333;
+  margin-bottom: 8px;
+}
+.rb-error {
+  color: var(--rb-red);
+  font-weight: 700;
+  margin-top: 8px;
+}
+/* Responsive */
+
+/* --- UX Improvements: row dot & cell focus/hover --- */
+
+.rb-header-bar {
+  background: linear-gradient(90deg, #002654 80%, #e10600 120%);
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.07);
+  padding: 18px 32px 12px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rb-nav-tabs {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.rb-nav-tab {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #fff;
+  padding: 7px 18px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.06);
+  cursor: pointer;
+  transition: all 0.14s;
+  border: 2px solid transparent;
+  box-shadow: 0 1px 8px 0 rgba(0,0,0,0.07);
+  position: relative;
+}
+.rb-nav-tab:hover {
+  background: #e10600;
+  color: #ffd700;
+  border-color: #ffd700;
+}
+.rb-nav-tab-active,
+.rb-nav-tab:active {
+  background: #ffd700;
+  color: #002654;
+  border-color: #e10600;
+  font-weight: 800;
+}
+
+.rb-title {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: #002654;
+  letter-spacing: 0.08em;
+  margin: 22px 0 12px 0;
+  text-shadow: 0 2px 8px rgba(0,39,102,0.08);
+  border-bottom: 2.5px solid #ffd700;
+  display: inline-block;
+  padding-bottom: 4px;
+  line-height: 1.15;
+}
+
+
+
+
+.rb-row-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+
+
+@media (max-width: 700px) {
+  .rb-matrix-table {padding: 0;}
+  .rb-matrix-column, .rb-matrix-row {font-size: 1.3rem !important; padding: 8px 2px;}
+  .rb-matrix-corner, .rb-matrix-row {width: 90px; min-width: 70px;}
+  .rb-matrix-column {min-width: 70px;}
+  .rb-matrix-cell {min-width: 70px; padding: 3px;}
+  .rb-cell-title {max-width: 54px; font-size: 0.8rem;}
+  .rb-matrix-row-label, .rb-matrix-row-label *, .rb-matrix-column, .rb-matrix-column *, .rb-matrix-column span, .rb-matrix-row-label span {
+    font-size: 1.3rem !important;
+  }
+}
